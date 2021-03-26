@@ -4,8 +4,13 @@ import os
 from datetime import datetime
 
 import cactus
+import dotenv
 import pytz
 import requests
+import twitter
+
+# Load the .env
+dotenv.load_dotenv(dotenv.find_dotenv())
 
 STATS_FILE = os.path.abspath(os.path.join(os.path.dirname(__file__), '../vaccine-stats.json'))
 
@@ -56,15 +61,43 @@ def fetch_current_stats():
     stats['percentage'] = (100. / stats['population']) * stats['vaccinated']
     return stats
 
+def progress_bar(percent):
+    bar_filled = '▓'
+    bar_empty = '░'
+    length = 15
+
+    progress_bar = bar_filled * int((percent / (100. / length)))
+    progress_bar += bar_empty * (length - len(progress_bar))
+    return f'{progress_bar} {percent:.1f}%'
+
+def send_tweet(population, vaccinated, percentage, *args, **kwargs):
+    message = '\n'.join([
+        '‼️ Fresno Vaccine Progress Update',
+        '',
+        f'Population: {population:,}',
+        f'Vaccinated: {vaccinated:,}',
+        '',
+        progress_bar(percentage)
+    ])
+
+    api = twitter.Api(
+        consumer_key=os.environ['TWITTER_CONSUMER_KEY'],
+        consumer_secret=os.environ['TWITTER_CONSUMER_SECRET'],
+        access_token_key=os.environ['TWITTER_ACCESS_KEY'],
+        access_token_secret=os.environ['TWITTER_ACCESS_SECRET']
+    )
+
+    api.PostUpdate(message)
 
 def main():
     previous = load_stats()
     previous.pop('updated', None)
     current = fetch_current_stats()
 
-    if previous != current:
+    if previous != current or True:
         save_stats(current)
         os.system('cactus build')
+        send_tweet(**current)
 
 
 if __name__ == '__main__':
