@@ -32,7 +32,16 @@
                 </div>
             </div>
 
-            <progress class="progress is-{% if stats.percentage < 40 %}danger{% elif stats.percentage < 70 %}warning{% else %}success{% endif %}" value="{{ stats.percentage|floatformat:1 }}" max="100">Current: {{ stats.percentage|floatformat:1 }}%</progress>
+            <div class="progress-bar">
+                <span class="goal-line"></span>
+                <progress class="progress is-large is-{% if stats.percentage < 40 %}danger{% elif stats.percentage < 70 %}warning{% else %}success{% endif %}" value="{{ stats.percentage|floatformat:1 }}" max="100">Current: {{ stats.percentage|floatformat:1 }}%</progress>
+                <div class="progress-goal">
+                    <span>Herd immunity kicks in around 80%</span>
+                    <span class="icon">
+                        <span class="fas fa-arrow-alt-up fa-lg"></span>
+                    </span>
+                </div>
+            </div>
 
             <div class="level has-text-grey is-size-7 is-italic">
                 <div class="level-item">
@@ -60,8 +69,8 @@
                             compared to the population that is eligible (age 16+) for
                             the vaccine.</p>
                         <p>This statistic is vitally important because it shows us how close
-                            we are to herd immunity, which generally thought to be around 80%. As
-                            we approach (and eventually pass) that mark, we'll see life
+                            we are to herd immunity (generally considered to be around 80%). As we approach – and
+                            eventually pass – that mark, we'll see life
                             returning to some kind of "normal".</p>
                     </div>
                     <hr />

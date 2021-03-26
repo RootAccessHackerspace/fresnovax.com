@@ -33,6 +33,32 @@ section
     &.stats
         background-color: $grey-lighter
 
+        .progress-bar
+            margin-bottom: 1em
+
+            progress
+                margin-bottom: 0
+
+            .progress-goal
+                color: $grey
+                font-size: $size-7
+                text-align: right
+                text-transform: uppercase
+                padding-right: 20%
+
+                .icon
+                    color: $green
+                    transform: rotate(45deg)
+                    vertical-align: sub
+
+            .goal-line
+                border-left: $grey-light 1px solid
+                float: left
+                height: 1.5rem
+                margin-bottom: -100%
+                margin-left: 80%
+                position: relative
+
     &.about
         @extend .has-background-white-ter
 
