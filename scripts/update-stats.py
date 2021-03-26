@@ -64,6 +64,7 @@ def main():
 
     if previous != current:
         save_stats(current)
+        os.system('cactus build')
 
 
 if __name__ == '__main__':
