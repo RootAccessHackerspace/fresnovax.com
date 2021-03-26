@@ -94,7 +94,7 @@ def main():
     previous.pop('updated', None)
     current = fetch_current_stats()
 
-    if previous != current or True:
+    if previous != current:
         save_stats(current)
         os.system('cactus build')
         send_tweet(**current)
