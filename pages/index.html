@@ -32,7 +32,7 @@
                 </div>
             </div>
 
-            <progress class="progress is-success is-forefront" value="{{ stats.percentage|floatformat:1 }}" max="100">Current: {{ stats.percentage|floatformat:1 }}%</progress>
+            <progress class="progress is-{% if stats.percentage < 40 %}danger{% elif stats.percentage < 70 %}warning{% else %}success{% endif %}" value="{{ stats.percentage|floatformat:1 }}" max="100">Current: {{ stats.percentage|floatformat:1 }}%</progress>
 
             <div class="level has-text-grey is-size-7 is-italic">
                 <div class="level-item">
@@ -89,7 +89,7 @@
                         </div>
                         <div class="level-item">
                             <div>
-                                <a href="" class="button is-dark">
+                                <a href="https://github.com/RootAccessHackerspace/fresnovax.com/" class="button is-dark">
                                     <span class="icon">
                                         <span class="fab fa-github"></span>
                                     </span>
