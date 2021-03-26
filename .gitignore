@@ -127,3 +127,7 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+.build/
+node_modules/
+vaccine-stats.json

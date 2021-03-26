@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Vaccine Progress | Fresno – Tracking overall COVID-19 vaccine progress in Fresno County</title>
+    <link rel="stylesheet" href="{% static '/static/css/style.css' %}" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600;1,700;1,900" rel="stylesheet">
+
+    <script defer src="https://use.fontawesome.com/releases/v5.15.3/js/solid.js" integrity="sha384-9xA4r2/2cctd+IZZKLvI1hmeHZ5Yp8xXkS6J8inDtdyZCqhEHVcTGmSUCbNED5Ae" crossorigin="anonymous"></script>
+    <script defer src="https://pro.fontawesome.com/releases/v5.15.3/js/brands.js" integrity="sha384-5u0zCiPDAEBQPvGxnai1VRZiSs9yQmyspSLrg0Fc7ru5CeddU1cef/24itMCpcWb" crossorigin="anonymous"></script>
+    <script defer src="https://pro.fontawesome.com/releases/v5.15.3/js/fontawesome.js" integrity="sha384-hwdDrjZFQbBwoFcHZZ/6e61XHiwY9csS0Wxi8i5jUgTurxmYITntaGLFYCssX7By" crossorigin="anonymous"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-EVCVJ524MB"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-EVCVJ524MB');
+    </script> -->
+</head>
+<body>
+    <section class="section header">
+        <div class="container">
+            <div class="columns is-mobile is-multiline is-centered is-vcentered">
+                <div class="column is-4-mobile is-2-tablet">
+                    <img src="{% static '/static/img/logo.png' %}" alt="" class="is-responsive" />
+                </div>
+                <div class="column is-12-mobile is-7-tablet">
+                    <h1 class="title">Vaccine Progress | Fresno</h1>
+                    <h2 class="subtitle">Tracking overall COVID-19 vaccine progress in Fresno County</h2>
+                    <p class="">
+                        <a href="http://fcdph.org/covid19vax" class="button is-success">Click here for COVID-19 vaccine information</a>
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    {% block body %}{% endblock %}
+
+    <footer class="footer">
+        <div class="container">
+            <div class="columns is-mobile is-multiline is-centered is-vcentered is-variable is-8">
+                <div class="column is-6-mobile is-3-tablet is-2-desktop">
+                    <a href="https://rootaccess.org/" target="_blank">
+                        <img src="{% static '/static/img/root-access.svg' %}" alt="Root Access" />
+                    </a>
+                </div>
+                <div class="column is-12-mobile is-8-tablet is-6-desktop">
+                    <div class="content">
+                        <p>Hi, we're <a href="https://rootaccess.org" target="_blank">Root Access</a>, a community hackerspace
+                        in Fresno's Tower District. We took action at <a href="https://rootaccess.org/covid-19/" taregt="_blank">the
+                        beginning of COVID to help make PPE</a>, and now we're tying to figure
+                        out when it's safe to reopen our doors to the community.</p>
+                        <p class="is-size-7 is-italic">(P.S., if anyone from FCDPH is reading this, please get in touch! We'd love to work with you on a better solution.)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    {% block scripts %}{% endblock %}
+</body>
+</html>

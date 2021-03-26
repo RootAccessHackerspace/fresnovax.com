@@ -1,0 +1,48 @@
+.semi
+    font-weight: 500
+
+a
+    @extend .has-text-weight-semibold
+
+h1, h2
+    font-weight: bold
+
+img
+    &.is-responsive
+        display: inline-block
+        width: 100%
+
+p.lead
+    font-size: $size-4
+
+.embed-container
+    height: 0
+    max-width: 100%
+    overflow: hidden
+    padding-bottom: 56.25%
+    position: relative
+
+    iframe, object, embed
+        height: 100%
+        left: 0
+        position: absolute
+        top: 0
+        width: 100%
+
+section
+    &.stats
+        background-color: #006633
+
+    &.about
+        @extend .has-background-white-ter
+
+.button
+    &.is-twitter
+        background-color: $twitter
+
+footer.footer
+    .byline
+        img
+            height: 1.5em
+            vertical-align: bottom
+

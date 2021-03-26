@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+
+{% block body %}
+{% load_vaccine_stats "stats" %}
+<section class="section stats">
+    <div class="container">
+        <div class="box">
+            <div class="level">
+                <div class="level-item has-text-centered">
+                    <div>
+                        <p class="heading">Fresno County Population<br />(aged 16 and up)</p>
+                        <p class="title">{{ stats.population|intcomma }}</p>
+                    </div>
+                </div>
+                <div class="level-item has-text-centered">
+                    <div>
+                        <p class="heading">Number of<br />Fully Vaccinated</p>
+                        <p class="title">{{ stats.vaccinated|intcomma }}</p>
+                    </div>
+                </div>
+                <div class="level-item has-text-centered">
+                    <div>
+                        <p class="heading">Percentage of<br />Fully Vaccinated</p>
+                        <p class="title has-text-{% if stats.percentage < 40 %}danger{% elif stats.percentage < 70 %}warning{% else %}success{% endif %}-dark"><u>{{ stats.percentage|floatformat:1 }}%</u></p>
+                    </div>
+                </div>
+                <div class="level-item has-text-centered">
+                    <div>
+                        <p class="heading">Goal for<br />Herd Immunity</p>
+                        <p class="title">~80%</p>
+                    </div>
+                </div>
+            </div>
+
+            <progress class="progress is-success is-forefront" value="{{ stats.percentage|floatformat:1 }}" max="100">Current: {{ stats.percentage|floatformat:1 }}%</progress>
+
+            <div class="level has-text-grey is-size-7 is-italic">
+                <div class="level-item">
+                    <p>Source: <a href="https://www.arcgis.com/apps/MapSeries/index.html?appid=c694b751cefe4828b48786d3024f818a">Fresno County Department of Public Health | COVID-19 Immunization Dashboard</a></p>
+                </div>
+                <div class="level-item">
+                    <p>Last updated {{ stats.updated }}.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section about">
+    <div class="container">
+        <div class="columns is-centered is-variable is-8">
+            <div class="column is-7-desktop">
+                <div class="box">
+                    <div class="content">
+                        <p>Fresno County's
+                            <a href="https://www.arcgis.com/apps/MapSeries/index.html?appid=c694b751cefe4828b48786d3024f818a">
+                            COVID-19 Immunization Dashboard</a>
+                            has some fantastic – and very positive! – statistics, but it
+                            doesn't show the percentage of fully vaccinated people as
+                            compared to the population that is eligible (age 16+) for
+                            the vaccine.</p>
+                        <p>This statistic is vitally important because it gives us a
+                            clear idea as to how immune we are as a community, and it
+                            allows us to get back to some semblance of "normal". We
+                            built this page to track our progress in the long march to
+                            "herd immunity," which is generally thought to be around 80%.</p>
+                    </div>
+                    <hr />
+                    <div class="level">
+                        <div class="level-item">
+                            <div>
+                                <a href="https://twitter.com/FresnoVax" class="button is-info is-twitter">
+                                    <span class="icon">
+                                        <span class="fab fa-twitter"></span>
+                                    </span>
+                                    <span>@FresnoVax</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="level-item">
+                            <div>
+                                <a href="mailto:info@rootaccess.org" class="button is-danger">
+                                    <span class="icon">
+                                        <span class="fas fa-envelope"></span>
+                                    </span>
+                                    <span>info@rootaccess.org</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="level-item">
+                            <div>
+                                <a href="" class="button is-dark">
+                                    <span class="icon">
+                                        <span class="fab fa-github"></span>
+                                    </span>
+                                    <span>Github</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="column is-8-mobile is-3-tablet is-4-desktop">
+                <img src="{% static '/static/img/fcdph-dashboard.png' %}" alt="Screenshot of the FCDPH Immunization Dashboard" class="is-responsive" />
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
