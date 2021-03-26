@@ -36,7 +36,7 @@
                 <span class="goal-line"></span>
                 <progress class="progress is-large is-{% if stats.percentage < 40 %}danger{% elif stats.percentage < 70 %}warning{% else %}success{% endif %}" value="{{ stats.percentage|floatformat:1 }}" max="100">Current: {{ stats.percentage|floatformat:1 }}%</progress>
                 <div class="progress-goal">
-                    <span>Herd immunity kicks in around 80%</span>
+                    <span>Herd immunity @ 80%</span>
                     <span class="icon">
                         <span class="fas fa-arrow-alt-up fa-lg"></span>
                     </span>
