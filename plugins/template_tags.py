@@ -7,9 +7,16 @@ from django.utils.dateparse import parse_datetime
 
 register = template.Library()
 
+
+@register.filter
+def jsonify(value):
+    return json.dumps(value)
+
+
 @register.filter
 def intcomma(value):
     return djintcomma(value)
+
 
 @register.simple_tag(takes_context=True)
 def load_vaccine_stats(context, varname):

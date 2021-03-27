@@ -15,6 +15,13 @@ img
 p.lead
     font-size: $size-4
 
+.button
+    &.is-multiline
+        min-height: 2.25em
+        white-space: unset
+        height: auto
+        flex-direction: column
+
 .embed-container
     height: 0
     max-width: 100%
@@ -30,8 +37,19 @@ p.lead
         width: 100%
 
 section
+    &.header
+        .title
+            font-weight: 800
+
     &.stats
         background-color: $grey-lighter
+
+        .level-item
+            .title
+                font-weight: 800
+
+        .chart
+            margin-bottom: 1.5em
 
         .progress-bar
             margin-bottom: 1em
@@ -58,6 +76,12 @@ section
                 margin-bottom: -100%
                 margin-left: 80%
                 position: relative
+
+        .sources
+            @extend .has-text-grey
+            @extend .is-size-7
+            @extend .is-italic
+            text-align: center
 
     &.about
         @extend .has-background-white-ter

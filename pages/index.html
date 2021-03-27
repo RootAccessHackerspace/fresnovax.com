@@ -8,13 +8,13 @@
             <div class="level">
                 <div class="level-item has-text-centered">
                     <div>
-                        <p class="heading">Fresno County Population<br />(aged 16 and up)</p>
+                        <p class="heading">Fresno County<br />Population</p>
                         <p class="title">{{ stats.population|intcomma }}</p>
                     </div>
                 </div>
                 <div class="level-item has-text-centered">
                     <div>
-                        <p class="heading">Number of<br />Fully Vaccinated</p>
+                        <p class="heading">Total Number of<br />Fully Vaccinated</p>
                         <p class="title">{{ stats.vaccinated|intcomma }}</p>
                     </div>
                 </div>
@@ -43,9 +43,9 @@
                 </div>
             </div>
 
-            <div class="level has-text-grey is-size-7 is-italic">
+            <div class="level sources">
                 <div class="level-item">
-                    <p>Source: <a href="https://www.arcgis.com/apps/MapSeries/index.html?appid=c694b751cefe4828b48786d3024f818a" target="_blank">Fresno County Department of Public Health | COVID-19 Immunization Dashboard</a></p>
+                    <p><a href="https://data.ca.gov/dataset/covid-19-vaccine-progress-dashboard-data">California COVID-19 Vaccine Progress Dashboard Data</a></p>
                 </div>
                 <div class="level-item">
                     <p>Last updated {{ stats.updated }}.</p>
@@ -57,21 +57,42 @@
 
 <section class="section about">
     <div class="container">
-        <div class="columns is-centered is-variable is-8">
-            <div class="column is-7-desktop">
+        <div class="columns is-centered is-multiline">
+            <div class="column is-8-tablet is-5-desktop">
+                <div class="box">
+                    <canvas id="vaccine-chart" class="chart" width="200" height="125"></canvas>
+                </div>
+                <div class="box" style="padding: 0">
+                    <a class="twitter-timeline" data-dnt="true" href="https://twitter.com/FresnoVax?ref_src=twsrc%5Etfw">Tweets by FresnoVax</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                </div>
+            </div>
+            <div class="column is-10-tablet is-7-desktop">
                 <div class="box">
                     <div class="content">
-                        <p>Fresno County's
-                            <a href="https://www.arcgis.com/apps/MapSeries/index.html?appid=c694b751cefe4828b48786d3024f818a" target="_blank">
-                            COVID-19 Immunization Dashboard</a>
-                            is full of good information, but it
-                            doesn't show the percentage of fully vaccinated people as
-                            compared to the population that is eligible (age 16+) for
-                            the vaccine.</p>
-                        <p>This statistic is vitally important because it shows us how close
-                            we are to herd immunity (generally considered to be around 80%). As we approach – and
-                            eventually pass – that mark, we'll see life
-                            returning to some kind of "normal".</p>
+                        <h3>What's this about?</h3>
+                        <p>We wanted an easier way to track the percentage of fully
+                            vaccinated people in Fresno County. This metric is vitally
+                            important because it shows us how close we are to herd
+                            immunity (generally considered to be around 80%). As we
+                            approach – and eventually (hopefully!) pass – that
+                            mark, we'll see life returning to some kind of "normal".</p>
+
+                        <h3>What does "fully vaccinated" mean?</h3>
+                        <p>Per the <a href="https://data.ca.gov/dataset/covid-19-vaccine-progress-dashboard-data">California COVID-19 Vaccine Progress Dashboard Data</a>,
+                            here is the criteria for someone to be considered fully vaccinated:</p>
+                        <ol>
+                            <li>They received one dose of Johnson &amp; Johnson.</li>
+                            <li>They received two Pfizer doses &GreaterEqual; 17 days apart.</li>
+                            <li>They received two Moderna doses &GreaterEqual; 24 days apart.</li>
+                            <li>They received a combination of Pfizer/Moderna doses &GreaterEqual; 17 days apart.</li>
+                            <li>They have three or more vaccination records.</li>
+                            <li>Their only dose in their immunization records is labeled as dose number 2.</p></li>
+                        </ol>
+                        <p>Note that "fully vaccinated" does not necessarily mean "fully
+                            protected". Full protection is assumed to
+                            happen about 14 days after the second dose of a two-dose
+                            vaccine (Pfizer/Moderna) or 28 days after a single-dose
+                            vaccine (Johnson &amp; Johnson).</p>
                     </div>
                     <hr />
                     <div class="level">
@@ -108,10 +129,112 @@
                     </div>
                 </div>
             </div>
-            <div class="column is-8-mobile is-3-tablet is-4-desktop">
-                <img src="{% static '/static/img/fcdph-dashboard.png' %}" alt="Screenshot of the FCDPH Immunization Dashboard" class="is-responsive" />
-            </div>
         </div>
     </div>
 </section>
+{% endblock %}
+
+{% block scripts %}
+    {% load_vaccine_stats "stats" %}
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/moment@2.29.1/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+    <script type="text/javascript">
+        window.chartColors = {
+            black:        'hsl(0, 0%, 4%)',
+            black_bis:    'hsl(0, 0%, 7%)',
+            black_ter:    'hsl(0, 0%, 14%)',
+            grey_darker:  'hsl(0, 0%, 21%)',
+            grey_dark:    'hsl(0, 0%, 29%)',
+            grey:         'hsl(0, 0%, 48%)',
+            grey_light:   'hsl(0, 0%, 71%)',
+            grey_lighter: 'hsl(0, 0%, 86%)',
+            grey_lightest: 'hsl(0, 0%, 93%)',
+            white_ter:    'hsl(0, 0%, 96%)',
+            white_bis:    'hsl(0, 0%, 98%)',
+            white:        'hsl(0, 0%, 100%)',
+            orange:       'hsl(14,  100%, 53%)',
+            yellow:       'hsl(48,  100%, 67%)',
+            green:        'hsl(141, 53%,  53%)',
+            turquoise:    'hsl(171, 100%, 41%)',
+            cyan:         'hsl(204, 71%,  53%)',
+            blue:         'hsl(217, 71%,  53%)',
+            purple:       'hsl(271, 100%, 71%)',
+            red:          'hsl(348, 86%, 61%)'
+        };
+
+        var ctx = document.getElementById('vaccine-chart').getContext('2d');
+        var dataChart = new Chart(ctx, {
+            data: {
+                labels: {{ stats.historical.dates|jsonify|safe }},
+                // responsive: true,
+                maintainAspectRatio: false,
+                datasets: [{
+                    type: 'line',
+                    label: '% Vaccinated',
+                    backgroundColor: window.chartColors.green,
+                    borderColor: window.chartColors.green,
+                    borderWidth: 2,
+                    fill: false,
+                    yAxisID: 'y-percentage',
+                    pointRadius: 1,
+                    pointHoverRadius: 5,
+                    data: {{ stats.historical.percents|jsonify|safe }}
+                }, {
+                    type: 'line',
+                    label: '# Vaccinated',
+                    backgroundColor: window.chartColors.cyan,
+                    borderColor: window.chartColors.cyan,
+                    borderWidth: 2,
+                    fill: false,
+                    yAxisID: 'y-amount',
+                    pointRadius: 1,
+                    pointHoverRadius: 5,
+                    data: {{ stats.historical.cumulative_fully_vaccinated|jsonify|safe }}
+                }]
+            },
+            options: {
+                onResize: function(chart, size){
+                    console.log(size)
+                },
+                title: {
+                    display: true,
+                    text: 'Full Vaccinations in Fresno County over the last 60 days'
+                },
+                legend: {
+                    display: true
+                },
+                scales: {
+                    xAxes: [{
+                        gridLines: {
+                            display: false
+                        },
+                        offset: true,
+                        stacked: true,
+                        type: 'time',
+                        time: {
+                            unit: 'day'
+                        }
+                    }],
+                    yAxes: [{
+                        id: 'y-percentage',
+                        ticks: {
+                            min: 0,
+                            max: 100,
+                        }
+                    }, {
+                        id: 'y-amount',
+                        position: 'right',
+                        stacked: true,
+                        gridLines: {
+                            display: false
+                        },
+                        ticks: {
+                            min: 0,
+                            // max: {{ stats.population }},
+                        }
+                    }]
+                },
+            }
+        });
+    </script>
 {% endblock %}
