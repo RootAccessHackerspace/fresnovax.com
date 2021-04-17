@@ -21,13 +21,13 @@
                 <div class="level-item has-text-centered">
                     <div>
                         <p class="heading">Percentage of<br />Fully Vaccinated</p>
-                        <p class="title has-text-{% if stats.percentage < 40 %}danger{% elif stats.percentage < 70 %}warning{% else %}success{% endif %}-dark"><u>{{ stats.percentage|floatformat:1 }}%</u></p>
+                        <p class="title has-text-{% if stats.percentage < 40 %}danger{% elif stats.percentage < 60 %}warning{% else %}success{% endif %}-dark"><u>{{ stats.percentage|floatformat }}%</u></p>
                     </div>
                 </div>
                 <div class="level-item has-text-centered">
                     <div>
-                        <p class="heading">Goal for<br />Herd Immunity</p>
-                        <p class="title">~80%</p>
+                        <p class="heading">Avg. Daily Increase<br />(Last 7 Days)</p>
+                        <p class="title">{{ stats.seven_day_increase|floatformat }}%</p>
                     </div>
                 </div>
             </div>
@@ -43,14 +43,23 @@
                 </div>
             </div>
 
-            <div class="level sources">
-                <div class="level-item">
-                    <p><a href="https://data.ca.gov/dataset/covid-19-vaccine-progress-dashboard-data">California COVID-19 Vaccine Progress Dashboard Data</a></p>
-                </div>
-                <div class="level-item">
-                    <p>Last updated {{ stats.updated }}.</p>
-                </div>
+            <div class="sources">
+                <p><a href="https://data.ca.gov/dataset/covid-19-vaccine-progress-dashboard-data">California COVID-19 Vaccine Progress Dashboard Data</a></p>
+                <p>Last updated {{ stats.updated }}.</p>
             </div>
+
+            <!-- <div class="level sources">
+                <div class="level-item">
+                    <p>
+                        <a href="http://fcdph.org/covid19vax" class="button is-multiline is-success">Click here for COVID-19 vaccine information</a>
+                    </p>
+                </div>
+                <div class="level-item has-text-right">
+                    <p>
+                        via <a href="https://data.ca.gov/dataset/covid-19-vaccine-progress-dashboard-data">California COVID-19 Vaccine Progress Dashboard Data</a>
+                        <br />Last updated {{ stats.updated }}.</p>
+                </div>
+            </div> -->
         </div>
     </div>
 </section>
@@ -62,8 +71,9 @@
                 <div class="box">
                     <canvas id="vaccine-chart" class="chart" width="200" height="125"></canvas>
                 </div>
-                <div class="box" style="padding: 0">
-                    <a class="twitter-timeline" data-dnt="true" href="https://twitter.com/FresnoVax?ref_src=twsrc%5Etfw">Tweets by FresnoVax</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                <div class="box" style="padding: 0;">
+                    <a class="twitter-timeline" height="420" data-dnt="true" href="https://twitter.com/FresnoVax?ref_src=twsrc%5Etfw">Tweets by FresnoVax</a>
+                    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
                 </div>
             </div>
             <div class="column is-10-tablet is-7-desktop">
@@ -71,11 +81,9 @@
                     <div class="content">
                         <h3>What's this about?</h3>
                         <p>We wanted an easier way to track the percentage of fully
-                            vaccinated people in Fresno County. This metric is vitally
-                            important because it shows us how close we are to herd
-                            immunity (generally considered to be around 80%). As we
-                            approach – and eventually (hopefully!) pass – that
-                            mark, we'll see life returning to some kind of "normal".</p>
+                            vaccinated people in Fresno County. This metric is
+                            important because it shows us how close we currently are to
+                            herd immunity (generally considered to be around 80%).</p>
 
                         <h3>What does "fully vaccinated" mean?</h3>
                         <p>Per the <a href="https://data.ca.gov/dataset/covid-19-vaccine-progress-dashboard-data">California COVID-19 Vaccine Progress Dashboard Data</a>,

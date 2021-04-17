@@ -65,15 +65,22 @@ def get_vaccinated_CADPH():
     return int(df[df['county'] == 'Fresno'].iloc[-1]['cumulative_fully_vaccinated'])
 
 
+def get_seven_day_average_increase(df):
+    absolute_average = df.iloc[len(df) - 7:]['cumulative_fully_vaccinated'].diff().mean()
+    percent_average = (100. / get_population()) * absolute_average
+    return percent_average
+
+
 def fetch_current_stats():
     url = 'https://data.chhs.ca.gov/dataset/e283ee5a-cf18-4f20-a92c-ee94a2866ccd/resource/130d7ba2-b6eb-438d-a412-741bde207e1c/download/covid19vaccinesbycounty.csv'
     df = pandas.read_csv(url)
     df = df[df['county'] == 'Fresno']
-    # df = df[df['cumulative_fully_vaccinated'] > 0]
     df = df.iloc[len(df) - 60:]
+
     stats = {
         'population': get_population(),
         'vaccinated': int(df.iloc[-1]['cumulative_fully_vaccinated']),
+        'seven_day_increase': get_seven_day_average_increase(df),
     }
     stats['historical'] = {
         'dates': df['administered_date'].to_list(),
