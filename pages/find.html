@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}Find a COVID-19 vaccine near me | {{ block.super }}{% endblock %}
+
+{% block body %}
+<section class="hero is-info">
+    <div class="hero-body">
+        <div class="container">
+            <div class="columns is-centered">
+                <div class="column is-11-tablet is-10-desktop">
+                    <h1 class="title">Find a COVID-19 vaccine near you</h1>
+                    <p>Hundreds of volunteers at <a href="https://www.vaccinateca.com/">VaccinateCA</a>
+                        have been tracking vaccine availability all across the state, and we've
+                        added their vaccine finder here so that you can find a vaccine close to you.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="section vaccinateca">
+        <iframe title="Vaccine Availability Map" src="https://www.vaccinateca.com/embed?lat=36.746841&lng=-119.772591&zoom=10" width="100%" height="500" frameborder="0" allowfullscreen></iframe>
+</section>
+{% endblock %}

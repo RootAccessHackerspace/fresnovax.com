@@ -3,12 +3,22 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Fresno Vaccine Progress – Tracking overall COVID-19 vaccine progress in Fresno County</title>
+    <title>{% block title %}FresnoVax.com{% endblock %}</title>
     <link rel="stylesheet" href="{% static '/static/css/style.css' %}" />
     <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700;1,800" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600;1,700;1,800" rel="stylesheet">
 
     <script defer src="https://pro.fontawesome.com/releases/v5.15.3/js/all.js" integrity="sha384-OF9QwbqmlzSPpIxe2GYS8lkGFyaFfrgUPD2J3qj8zGVps17Y/x8EK2U8PEl6UrpH" crossorigin="anonymous"></script>
+
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static '/static/img/favicon/apple-touch-icon.png?v=wAMmYpdKpl' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static '/static/img/favicon/favicon-32x32.png?v=wAMmYpdKpl' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static '/static/img/favicon/favicon-16x16.png?v=wAMmYpdKpl' %}">
+    <link rel="manifest" href="{% static '/static/img/favicon/site.webmanifest?v=wAMmYpdKpl' %}">
+    <link rel="mask-icon" href="{% static '/static/img/favicon/safari-pinned-tab.svg?v=wAMmYpdKpl' %}" color="#5bbad5">
+    <link rel="shortcut icon" href="{% static '/static/img/favicon/favicon.ico?v=wAMmYpdKpl' %}">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="theme-color" content="#ffffff">
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-SXN2YVGSEW"></script>
@@ -25,14 +35,20 @@
         <div class="container">
             <div class="columns is-mobile is-multiline is-centered is-vcentered">
                 <div class="column is-6-mobile is-2-tablet">
-                    <img src="{% static '/static/img/logo.png' %}" alt="" class="is-responsive" />
+                    <a href="/">
+                        <img src="{% static '/static/img/logo.png' %}" alt="" class="is-responsive" />
+                    </a>
                 </div>
                 <div class="column is-12-mobile is-7-tablet">
-                    <h1 class="title">Fresno Vaccine Progress</h1>
-                    <h2 class="subtitle">Tracking overall COVID-19 vaccine progress in Fresno County</h2>
-                    <p>
-                        <a href="http://fcdph.org/covid19vax" class="button is-multiline is-success">Click here for COVID-19 vaccine information</a>
-                    </p>
+                    <div class="content">
+                        <h1 class="title">
+                            <a href="/">Fresno Vaccine Progress</a>
+                        </h1>
+                        <h2 class="subtitle">Tracking overall COVID-19 vaccine progress in Fresno County</h2>
+                        <p>
+                            <a href="/find/" class="button is-multiline is-success">Find a COVID-19 vaccine near you</a>
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -49,12 +65,37 @@
                     </a>
                 </div>
                 <div class="column is-12-mobile is-8-tablet is-6-desktop">
-                    <div class="content is-size-6">
-                        <p>Hey there! We're <a href="https://rootaccess.org">Root Access</a>, a community hackerspace
-                        in Fresno's Tower District. We took immediate action in <a href="https://rootaccess.org/covid-19/">the
-                        beginning of COVID to help during the PPE shortage</a>, and now we're trying to figure
-                        out when it might be safe to reopen our doors to the community.</p>
-                        <p>If you find this page useful and you'd like to show some support, <a href="https://givebutter.com/root-access-laser">we're currently fundraising for a new laser cutter</a>. :)</p>
+                    <div class="is-size-6">
+                        <div class="content">
+                            <p><span class="has-text-weight-semibold">Hey there!</span> We're <a href="https://rootaccess.org">Root Access</a>, a community hackerspace
+                            in Fresno's Tower District. We took immediate action in <a href="https://rootaccess.org/covid-19/">the
+                            beginning of COVID to help during the PPE shortage</a>, and now we're trying to figure
+                            out when it might be safe to reopen our doors to the community.</p>
+                            <p>If you find this page useful and you'd like to show some support, <a href="https://givebutter.com/root-access-laser">we're currently fundraising for a new laser cutter</a>. :)</p>
+                        </div>
+                        <div class="buttons are-small">
+                            <a href="https://twitter.com/FresnoVax" class="button is-info is-twitter">
+                                <span class="icon">
+                                    <span class="fab fa-twitter"></span>
+                                </span>
+                                <span>@FresnoVax</span>
+                            </a>
+
+                            <a href="mailto:info@rootaccess.org" class="button is-danger">
+                                <span class="icon">
+                                    <span class="fas fa-envelope"></span>
+                                </span>
+                                <span>info@rootaccess.org</span>
+                            </a>
+
+                            <a href="https://github.com/RootAccessHackerspace/fresnovax.com/" class="button is-dark">
+                                <span class="icon">
+                                    <span class="fab fa-github"></span>
+                                </span>
+                                <span>Github</span>
+                            </a>
+                        </div>
+
                     </div>
                 </div>
             </div>

@@ -38,15 +38,30 @@ p.lead
 
 section
     &.header
+        padding: 1rem 1.5rem
+
         .title
-            font-weight: 800
+            font-size: 2em
+            font-weight: 700
+
+            a
+                color: $grey-dark
+                font-weight: inherit !important
+                text-decoration: none
+
+                &:hover
+                    text-decoration: underline
+
+        .subtitle
+            font-size: 1.4em
+            font-weight: normal
 
     &.stats
-        background-color: $grey-lighter
+        background-color: $cyan
 
         .level-item
             .title
-                font-weight: 800
+                font-weight: 700
 
         .chart
             margin-bottom: 1.5em
@@ -83,8 +98,20 @@ section
             @extend .is-italic
             text-align: center
 
+    &.info
+        .links
+            .by
+                @extend .is-size-7
+                color: $grey
+
     &.about
         @extend .has-background-white-ter
+
+    &.vaccinateca
+        background-color: $white-bis
+
+        iframe
+            height: 99vh
 
 .button
     &.is-twitter

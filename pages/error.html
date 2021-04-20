@@ -1,15 +1,24 @@
 {% extends "base.html" %}
 
 {% block body %}
-<div class="jumbotron">
-  <div class="container">
-    <h1>We're sorry!</h1>
-    <p>The page <b id="url"></b> could not be found on this server.</p>
-  </div>
-</div>
+<section class="section has-background-danger">
+    <div class="container">
+        <div class="box">
+            <div class="content">
+                <h1 class="title">We're sorry!</h1>
+                <p>The page <b id="url"></b> could not be found on this server. :(</p>
+            </div>
+        </div>
+    </div>
+</section>
 {% endblock body %}
 
 {% block scripts %}
+    <script
+        src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+        crossorigin="anonymous"
+    ></script>
   <script type="text/javascript" charset="utf-8">
     $(document).ready(function() {
 

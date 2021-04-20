@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% block title %}Tracking overall COVID-19 vaccine progress in Fresno County | {{ block.super }}{% endblock %}
+
 {% block body %}
 {% load_vaccine_stats "stats" %}
 <section class="section stats">
@@ -44,22 +46,84 @@
             </div>
 
             <div class="sources">
-                <p><a href="https://data.ca.gov/dataset/covid-19-vaccine-progress-dashboard-data">California COVID-19 Vaccine Progress Dashboard Data</a></p>
+                <p>via <a href="https://data.ca.gov/dataset/covid-19-vaccine-progress-dashboard-data">California Department of Public Health</a></p>
                 <p>Last updated {{ stats.updated }}.</p>
             </div>
+        </div>
+    </div>
+</section>
 
-            <!-- <div class="level sources">
-                <div class="level-item">
-                    <p>
-                        <a href="http://fcdph.org/covid19vax" class="button is-multiline is-success">Click here for COVID-19 vaccine information</a>
-                    </p>
+<section class="section info">
+    <div class="container">
+        <div class="columns is-centered">
+            <div class="column is-6">
+                <canvas id="vaccine-chart" class="chart" width="200" height="125"></canvas>
+            </div>
+            <div class="column is-5 is-offset-1">
+                <div class="content">
+                    <h4>
+                        <span class="fad fa-syringe fa-lg fa-fw" style="
+                            --fa-secondary-opacity: 1.0;
+                            --fa-primary-color: grey;
+                            --fa-secondary-color: powderblue;
+                        "></span>
+                        <span>Find a Vaccine</span>
+                    </h4>
+                    <ul class="links">
+                        <li>
+                            <a href="https://myturn.ca.gov/">My Turn</a>
+                            <span class="by">California Department of Public Health</span>
+                        </li>
+                        <li>
+                            <a href="https://www.vaccinateca.com/">VaccinateCA</a>
+                            <span class="by">A volunteer, community-driven effort</span>
+                        </li>
+                        <li>
+                            <a href="https://vaccinefinder.org/">VaccineFinder</a>
+                            <span class="by">Boston Children's Hospital, CDC, USDS</span>
+                        </li>
+                    </ul>
+
+                    <h4>
+                        <span class="fad fa-viruses fa-lg fa-fw" style="
+                            --fa-secondary-opacity: 1.0;
+                            --fa-primary-color: crimson;
+                            --fa-secondary-color: silver;
+                        "></span>
+                        <span>COVID-19 Information</span>
+                    </h4>
+                    <ul class="links">
+                        <li>
+                            <a href="https://www.co.fresno.ca.us/departments/public-health/covid-19">Fresno County</a>
+                        </li>
+                        <li>
+                            <a href="https://covid19.ca.gov/">California</a>
+                        </li>
+                    </ul>
+                    <h4>
+                        <span class="fad fa-chart-line fa-lg fa-fw" style="
+                            --fa-secondary-opacity: 1.0;
+                            --fa-primary-color: mediumseagreen;
+                            --fa-secondary-color: silver;
+                        "></span>
+                        <span>Data Resources</span>
+                    </h4>
+                    <ul class="links">
+                        <li>
+                            <a href="https://data.ca.gov/group/covid-19">COVID-19 Datasets</a>
+                            <span class="by">California Open Data Portal</span>
+                        </li>
+                        <li>
+                            <a href="https://covid19.ca.gov/vaccination-progress-data/">Vaccination Progress Data</a>
+                            <span class="by">California DPH</span>
+                        </li>
+                        <li>
+                            <a href="https://www.arcgis.com/apps/MapSeries/index.html?appid=c694b751cefe4828b48786d3024f818a">COVID-19 Immunization Dashboard</a>
+                            <span class="by">Fresno County DPH</span>
+                        </li>
+                    </ul>
                 </div>
-                <div class="level-item has-text-right">
-                    <p>
-                        via <a href="https://data.ca.gov/dataset/covid-19-vaccine-progress-dashboard-data">California COVID-19 Vaccine Progress Dashboard Data</a>
-                        <br />Last updated {{ stats.updated }}.</p>
-                </div>
-            </div> -->
+            </div>
         </div>
     </div>
 </section>
@@ -67,23 +131,27 @@
 <section class="section about">
     <div class="container">
         <div class="columns is-centered is-multiline">
-            <div class="column is-8-tablet is-5-desktop">
-                <div class="box">
-                    <canvas id="vaccine-chart" class="chart" width="200" height="125"></canvas>
-                </div>
-                <div class="box" style="padding: 0;">
-                    <a class="twitter-timeline" height="420" data-dnt="true" href="https://twitter.com/FresnoVax?ref_src=twsrc%5Etfw">Tweets by FresnoVax</a>
-                    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-                </div>
-            </div>
             <div class="column is-10-tablet is-7-desktop">
                 <div class="box">
                     <div class="content">
-                        <h3>What's this about?</h3>
+                        <h3>What's this all about?</h3>
                         <p>We wanted an easier way to track the percentage of fully
                             vaccinated people in Fresno County. This metric is
                             important because it shows us how close we currently are to
                             herd immunity (generally considered to be around 80%).</p>
+
+                        <p>Be sure to follow <a href="https://twitter.com/FresnoVax">@FresnoVax</a> on Twitter for daily updates.</p>
+
+                        <hr />
+                        <h3>How can I get a COVID-19 vaccine?</h3>
+                        <p>Hundreds of volunteers at <a href="https://www.vaccinateca.com/">VaccinateCA</a>
+                            have been tracking vaccine availability all across the state, and we've
+                            added their vaccine finder here so that you can find a vaccine close to you.</p>
+                        <p>
+                            <a href="/find/" class="button is-multiline is-medium is-success">Find a COVID-19 vaccine near you!</a>
+                        </p>
+
+                        <hr />
 
                         <h3>What does "fully vaccinated" mean?</h3>
                         <p>Per the <a href="https://data.ca.gov/dataset/covid-19-vaccine-progress-dashboard-data">California COVID-19 Vaccine Progress Dashboard Data</a>,
@@ -102,39 +170,12 @@
                             vaccine (Pfizer/Moderna) or 28 days after a single-dose
                             vaccine (Johnson &amp; Johnson).</p>
                     </div>
-                    <hr />
-                    <div class="level">
-                        <div class="level-item">
-                            <div>
-                                <a href="https://twitter.com/FresnoVax" class="button is-info is-twitter">
-                                    <span class="icon">
-                                        <span class="fab fa-twitter"></span>
-                                    </span>
-                                    <span>@FresnoVax</span>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="level-item">
-                            <div>
-                                <a href="mailto:info@rootaccess.org" class="button is-danger">
-                                    <span class="icon">
-                                        <span class="fas fa-envelope"></span>
-                                    </span>
-                                    <span>info@rootaccess.org</span>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="level-item">
-                            <div>
-                                <a href="https://github.com/RootAccessHackerspace/fresnovax.com/" class="button is-dark">
-                                    <span class="icon">
-                                        <span class="fab fa-github"></span>
-                                    </span>
-                                    <span>Github</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+                </div>
+            </div>
+            <div class="column is-10-tablet is-5-desktop">
+                <div class="box" style="padding: 0;">
+                    <a class="twitter-timeline" height="420" data-dnt="true" href="https://twitter.com/FresnoVax?ref_src=twsrc%5Etfw">Tweets by FresnoVax</a>
+                    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
                 </div>
             </div>
         </div>
