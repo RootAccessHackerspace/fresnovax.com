@@ -19,24 +19,6 @@
                     <div class="level">
                         <div class="level-item">
                             <div>
-                                <p class="heading">At Least One Dose</p>
-                                <p class="title is-spaced has-text-{% if stats.one_dose_percent < 40 %}danger{% elif stats.one_dose_percent < 60 %}warning{% else %}success{% endif %}-dark">{{ stats.one_dose_percent|floatformat }}%</p>
-                                <p class="subtitle">{{ stats.one_dose|intcomma }}</p>
-                            </div>
-                        </div>
-                        <div class="level-item">
-                            <div>
-                                <p class="heading">7-Day Avg. Increase</p>
-                                <p class="title is-spaced">{{ stats.seven_day_one_dose_percent|floatformat }}%</p>
-                                <p class="subtitle">&nbsp;<!-- {{ stats.seven_day_one_dose|intcomma }} --></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="level-item has-text-centered">
-                    <div class="level">
-                        <div class="level-item">
-                            <div>
                                 <p class="heading">Fully Vaccinated</p>
                                 <p class="title is-spaced has-text-{% if stats.vaccinated_percent < 40 %}danger{% elif stats.vaccinated_percent < 60 %}warning{% else %}success{% endif %}-dark">{{ stats.vaccinated_percent|floatformat }}%</p>
                                 <p class="subtitle">{{ stats.vaccinated|intcomma }}</p>
@@ -49,6 +31,26 @@
                                 <p class="subtitle">&nbsp;<!-- {{ stats.seven_day_vaccinated|intcomma }} --></p>
                             </div>
                         </div>
+                    </div>
+                </div>
+                <div class="level-item has-text-centered ">
+                    <div class="level">
+                        <div class="level-item">
+                            <div>
+                                <p class="heading">At Least One Dose</p>
+                                <p class="title is-spaced has-text-{% if stats.one_dose_percent < 40 %}danger{% elif stats.one_dose_percent < 60 %}warning{% else %}success{% endif %}-dark">{{ stats.one_dose_percent|floatformat }}%</p>
+                                <p class="subtitle">{{ stats.one_dose|intcomma }}</p>
+                            </div>
+                        </div>
+                        {% comment %}
+                        <div class="level-item">
+                            <div>
+                                <p class="heading">7-Day Avg. Increase</p>
+                                <p class="title is-spaced">{{ stats.seven_day_one_dose_percent|floatformat }}%</p>
+                                <p class="subtitle">&nbsp;<!-- {{ stats.seven_day_one_dose|intcomma }} --></p>
+                            </div>
+                        </div>
+                        {% endcomment %}
                     </div>
                 </div>
             </div>
