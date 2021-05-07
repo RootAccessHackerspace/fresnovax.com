@@ -66,9 +66,19 @@ def get_vaccinated_CADPH():
 
 
 def get_seven_day_average_increase(df):
-    absolute_average = df.iloc[len(df) - 7:]['cumulative_fully_vaccinated'].diff().mean()
-    percent_average = (100. / get_population()) * absolute_average
-    return percent_average
+    df = df.iloc[len(df) - 7:]
+    vaccinated_average = df['fully_vaccinated'].mean()
+    vaccinated_percent = (100. / get_population()) * vaccinated_average
+
+    one_dose_average = df['partially_vaccinated'].mean()
+    one_dose_percent = (100. / get_population()) * one_dose_average
+
+    return {
+        'seven_day_vaccinated': int(round(vaccinated_average)),
+        'seven_day_vaccinated_percent': vaccinated_percent,
+        'seven_day_one_dose': int(round(one_dose_average)),
+        'seven_day_one_dose_percent': one_dose_percent,
+    }
 
 
 def fetch_current_stats():
@@ -80,22 +90,29 @@ def fetch_current_stats():
     stats = {
         'population': get_population(),
         'vaccinated': int(df.iloc[-1]['cumulative_fully_vaccinated']),
-        'seven_day_increase': get_seven_day_average_increase(df),
+        'one_dose': int(df.iloc[-1]['cumulative_at_least_one_dose']),
     }
+
+    stats.update(
+        vaccinated_percent=(100. / stats['population']) * stats['vaccinated'],
+        one_dose_percent=(100. / stats['population']) * stats['one_dose'],
+    )
+
+    stats.update(get_seven_day_average_increase(df))
+
     stats['historical'] = {
         'dates': df['administered_date'].to_list(),
         'fully_vaccinated': df['fully_vaccinated'].to_list(),
         'cumulative_fully_vaccinated': df['cumulative_fully_vaccinated'].to_list(),
         'percents': [round((100. / stats['population']) * x, 1) for x in df['cumulative_fully_vaccinated'].to_list()]
     }
-    stats['percentage'] = (100. / stats['population']) * stats['vaccinated']
     return stats
 
 
 def progress_bar(percent):
     bar_filled = '▓'
     bar_empty = '░'
-    length = 15
+    length = 20
 
     progress_bar = bar_filled * int((percent / (100. / length)))
     progress_bar += bar_empty * (length - len(progress_bar))
@@ -129,8 +146,8 @@ def main():
 
     if previous != current:
         save_stats(current)
-        os.system('cactus build')
-        send_tweet(**current)
+        # os.system('cactus build')
+        # send_tweet(**current)
 
 
 if __name__ == '__main__':

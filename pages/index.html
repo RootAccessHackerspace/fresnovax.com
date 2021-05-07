@@ -10,33 +10,53 @@
             <div class="level">
                 <div class="level-item has-text-centered">
                     <div>
-                        <p class="heading">Fresno County<br />Population</p>
-                        <p class="title">{{ stats.population|intcomma }}</p>
+                        <p class="heading">Fresno County Population</p>
+                        <p class="title is-spaced">{{ stats.population|intcomma }}</p>
+                        <p class="subtitle">&nbsp;</p>
+                    </div>
+                </div>
+                <div class="level-item has-text-centered has-background-white-ter">
+                    <div class="level">
+                        <div class="level-item">
+                            <div>
+                                <p class="heading">At Least One Dose</p>
+                                <p class="title is-spaced has-text-{% if stats.one_dose_percent < 40 %}danger{% elif stats.one_dose_percent < 60 %}warning{% else %}success{% endif %}-dark">{{ stats.one_dose_percent|floatformat }}%</p>
+                                <p class="subtitle">{{ stats.one_dose|intcomma }}</p>
+                            </div>
+                        </div>
+                        <div class="level-item">
+                            <div>
+                                <p class="heading">7-Day Avg. Increase</p>
+                                <p class="title is-spaced">{{ stats.seven_day_one_dose_percent|floatformat }}%</p>
+                                <p class="subtitle">{{ stats.seven_day_one_dose|intcomma }}</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="level-item has-text-centered">
-                    <div>
-                        <p class="heading">Total Number of<br />Fully Vaccinated</p>
-                        <p class="title">{{ stats.vaccinated|intcomma }}</p>
-                    </div>
-                </div>
-                <div class="level-item has-text-centered">
-                    <div>
-                        <p class="heading">Percentage of<br />Fully Vaccinated</p>
-                        <p class="title has-text-{% if stats.percentage < 40 %}danger{% elif stats.percentage < 60 %}warning{% else %}success{% endif %}-dark"><u>{{ stats.percentage|floatformat }}%</u></p>
-                    </div>
-                </div>
-                <div class="level-item has-text-centered">
-                    <div>
-                        <p class="heading">Avg. Daily Increase<br />(Last 7 Days)</p>
-                        <p class="title">{{ stats.seven_day_increase|floatformat }}%</p>
+                    <div class="level">
+                        <div class="level-item">
+                            <div>
+                                <p class="heading">Fully Vaccinated</p>
+                                <p class="title is-spaced has-text-{% if stats.vaccinated_percent < 40 %}danger{% elif stats.vaccinated_percent < 60 %}warning{% else %}success{% endif %}-dark">{{ stats.vaccinated_percent|floatformat }}%</p>
+                                <p class="subtitle">{{ stats.vaccinated|intcomma }}</p>
+                            </div>
+                        </div>
+                        <div class="level-item">
+                            <div>
+                                <p class="heading">7-Day Avg. Increase</p>
+                                <p class="title is-spaced">{{ stats.seven_day_vaccinated_percent|floatformat }}%</p>
+                                <p class="subtitle">{{ stats.seven_day_vaccinated|intcomma }}</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <div class="progress-bar">
                 <span class="goal-line"></span>
-                <progress class="progress is-large is-{% if stats.percentage < 40 %}danger{% elif stats.percentage < 70 %}warning{% else %}success{% endif %}" value="{{ stats.percentage|floatformat:1 }}" max="100">Current: {{ stats.percentage|floatformat:1 }}%</progress>
+                <progress class="progress is-large is-primary partial-vax" value="{{ stats.one_dose_percent|floatformat:1 }}" max="100">Current: {{ stats.one_dose_percent|floatformat:1 }}%</progress>
+                <progress class="progress is-large is-success full-vax" value="{{ stats.vaccinated_percent|floatformat:1 }}" max="100">Current: {{ stats.vaccinated_percent|floatformat:1 }}%</progress>
                 <div class="progress-goal">
                     <span>Herd immunity @ 80%</span>
                     <span class="icon">
@@ -135,7 +155,7 @@
                 <div class="box">
                     <div class="content">
                         <h3>What's this all about?</h3>
-                        <p>We wanted an easier way to track the percentage of fully
+                        <p>We wanted an easier way to track the percent of fully
                             vaccinated people in Fresno County. This metric is
                             important because it shows us how close we currently are to
                             herd immunity (generally considered to be around 80%).</p>
@@ -224,7 +244,7 @@
                     borderColor: window.chartColors.green,
                     borderWidth: 2,
                     fill: false,
-                    yAxisID: 'y-percentage',
+                    yAxisID: 'y-percent',
                     pointRadius: 1,
                     pointHoverRadius: 5,
                     data: {{ stats.historical.percents|jsonify|safe }}
@@ -265,7 +285,7 @@
                         }
                     }],
                     yAxes: [{
-                        id: 'y-percentage',
+                        id: 'y-percent',
                         ticks: {
                             min: 0,
                             max: 100,

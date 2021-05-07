@@ -60,8 +60,15 @@ section
         background-color: $cyan
 
         .level-item
+            padding: .5rem
+
             .title
                 font-weight: 700
+
+            .subtitle
+                color: $grey
+                font-size: $size-6
+                font-weight: 300
 
         .chart
             margin-bottom: 1.5em
@@ -71,6 +78,14 @@ section
 
             progress
                 margin-bottom: 0
+
+                &.full-vax
+                    background-color: transparent
+                    &::-webkit-progress-bar
+                        background-color: transparent
+
+                    margin-top: -1.5rem
+                    position: relative
 
             .progress-goal
                 color: $grey

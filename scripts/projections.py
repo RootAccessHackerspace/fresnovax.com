@@ -45,10 +45,12 @@ print(f'7-day average increase: {int(increase["absolute"])} ({increase["percent"
 print(f'Days until June 15th: {days_to_reopen}')
 print(f'Estimated percentage on June 15th: {projected_percentage:.1f}%')
 print(f'Projected dates by percentage:')
-print(f'\t25%: {estimated_percentage(25, current_percentage, increase["percent"])}')
-print(f'\t50%: {estimated_percentage(50, current_percentage, increase["percent"])}')
-print(f'\t65%: {estimated_percentage(65, current_percentage, increase["percent"])}')
-print(f'\t80%: {estimated_percentage(80, current_percentage, increase["percent"])}')
-print('')
+
+for x in (25, 50, 65, 80):
+    if x < current_percentage:
+        continue
+    projection_date = estimated_percentage(x, current_percentage, increase["percent"])
+    days_away = (projection_date - today).days
+    print(f'\t{x}%: {projection_date} ({days_away} days)')
 
 # code.interact(local=locals())
