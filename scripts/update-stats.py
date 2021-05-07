@@ -119,11 +119,11 @@ def progress_bar(percent):
     return f'{progress_bar} {percent:.1f}%'
 
 
-def send_tweet(population, vaccinated, percentage, *args, **kwargs):
+def send_tweet(population, vaccinated, percent, *args, **kwargs):
     message = '\n'.join([
         '‼️ Fresno Vaccination Progress:',
         '',
-        progress_bar(percentage),
+        progress_bar(percent),
         '',
         'Learn more at FresnoVax.com'
     ])
