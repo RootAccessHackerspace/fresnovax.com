@@ -112,7 +112,7 @@ def fetch_current_stats():
 def progress_bar(percent):
     bar_filled = '▓'
     bar_empty = '░'
-    length = 20
+    length = 15
 
     progress_bar = bar_filled * int((percent / (100. / length)))
     progress_bar += bar_empty * (length - len(progress_bar))
