@@ -7,50 +7,48 @@
 <section class="section stats">
     <div class="container">
         <div class="box">
-            <div class="level">
-                <div class="level-item has-text-centered">
-                    <div>
+            <div class="columns is-desktop">
+                <div class="column is-one-quarter-desktop has-text-centered">
+                    <div class="content">
                         <p class="heading">Fresno County Population</p>
-                        <p class="title is-spaced">{{ stats.population|intcomma }}</p>
+                        <p class="title">{{ stats.population|intcomma }}</p>
                         <p class="subtitle">&nbsp;</p>
                     </div>
                 </div>
-                <div class="level-item has-text-centered has-background-white-ter">
+                <div class="column has-text-centered has-background-white-ter">
                     <div class="level">
                         <div class="level-item">
                             <div>
                                 <p class="heading">Fully Vaccinated</p>
                                 <p class="title is-spaced has-text-{% if stats.vaccinated_percent < 40 %}danger{% elif stats.vaccinated_percent < 60 %}warning{% else %}success{% endif %}-dark">{{ stats.vaccinated_percent|floatformat }}%</p>
-                                <p class="subtitle">{{ stats.vaccinated|intcomma }}</p>
+                                <p class="subtitle has-text-weight-semibold">{{ stats.vaccinated|intcomma }}</p>
                             </div>
                         </div>
                         <div class="level-item">
                             <div>
                                 <p class="heading">7-Day Avg. Increase</p>
                                 <p class="title is-spaced">{{ stats.seven_day_vaccinated_percent|floatformat }}%</p>
-                                <p class="subtitle">&nbsp;<!-- {{ stats.seven_day_vaccinated|intcomma }} --></p>
+                                <p class="subtitle"><span class="has-text-weight-semibold">{{ stats.seven_day_vaccinated|intcomma }}</span>/day</p>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="level-item has-text-centered ">
+                <div class="column has-text-centered ">
                     <div class="level">
                         <div class="level-item">
                             <div>
-                                <p class="heading">At Least One Dose</p>
+                                <p class="heading">Partially Vaccinated</p>
                                 <p class="title is-spaced has-text-{% if stats.one_dose_percent < 40 %}danger{% elif stats.one_dose_percent < 60 %}warning{% else %}success{% endif %}-dark">{{ stats.one_dose_percent|floatformat }}%</p>
-                                <p class="subtitle">{{ stats.one_dose|intcomma }}</p>
+                                <p class="subtitle has-text-weight-semibold">{{ stats.one_dose|intcomma }}</p>
                             </div>
                         </div>
-                        {% comment %}
                         <div class="level-item">
                             <div>
                                 <p class="heading">7-Day Avg. Increase</p>
-                                <p class="title is-spaced">{{ stats.seven_day_one_dose_percent|floatformat }}%</p>
-                                <p class="subtitle">&nbsp;<!-- {{ stats.seven_day_one_dose|intcomma }} --></p>
+                                <p class="title is-spaced is-size-3">{{ stats.seven_day_one_dose_percent|floatformat }}%</p>
+                                <p class="subtitle"><span class="has-text-weight-semibold">{{ stats.seven_day_one_dose|intcomma }}</span>/day</p>
                             </div>
                         </div>
-                        {% endcomment %}
                     </div>
                 </div>
             </div>
